@@ -23,20 +23,24 @@
  */
 
 /**
- * @file component-template.c
- * @brief implementations for component component-template
+ * @file spiffs.h
+ * @brief defininitions for spiffs
  */
 
-// rest of the includes
+#ifndef SPIFFS_H
+#define SPIFFS_H
 
-// variables
+// includes pertinent to this file
+#include <stdio.h>
+#include <string.h>
+#include <sys/unistd.h>
+#include <sys/stat.h>
+#include "esp_err.h"
+#include "esp_log.h"
+#include "esp_spiffs.h"
+#include "mbedtls/md5.h"
 
-// function definitions
-/**
- * an example function
- * @param par some example float value
- * @return some int value
- */
-int example(float par){
+// function declarations
+void spiffs_init(void);
 
-}
+#endif // SPIFFS_H

@@ -48,3 +48,6 @@ the code in this project is licensed under the MIT license - see LICENSE for det
 # helpful commands
 
 - `git submodule update --remote --recursive` - updates the checked out modules to the most recent commit to their main branch
+
+
+see [spiffgen example](https://github.com/espressif/esp-idf/tree/master/examples/storage/spiffsgen) or [spiffs docs](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/storage/spiffs.html) for more info

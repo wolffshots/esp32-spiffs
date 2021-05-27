@@ -30,17 +30,11 @@
 #ifndef SPIFFS_H
 #define SPIFFS_H
 
-// includes pertinent to this file
-#include <stdio.h>
-#include <string.h>
-#include <sys/unistd.h>
-#include <sys/stat.h>
-#include "esp_err.h"
-#include "esp_log.h"
-#include "esp_spiffs.h"
-#include "mbedtls/md5.h"
+#include <sys/types.h>
 
 // function declarations
+void read_file(const char *);
 void spiffs_init(void);
+off_t get_file_size(const char *);
 
 #endif // SPIFFS_H

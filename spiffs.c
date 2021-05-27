@@ -40,11 +40,29 @@
 #include <sys/unistd.h>
 #include <dirent.h>
 
+#include "spiffs.h"
+
+#include "utility.h"
+
 // variables
 static const char *TAG = CONFIG_SPIFFS_TAG;
 
 // function definitions
-static void read_hello_txt(char *pwd)
+
+off_t get_file_size(const char *filename)
+{
+    struct stat st;
+    if (stat(filename, &st) == 0)
+    {
+        ESP_LOGI(TAG, "file size: %ld", st.st_size);
+        return st.st_size;
+    }
+    ESP_LOGI(TAG, "Cannot determine size of %s\n",
+             filename);
+    return -1;
+}
+
+void read_file(const char *pwd)
 {
     ESP_LOGI(TAG, "Reading %s", pwd);
     // Open for reading hello.txt
@@ -54,12 +72,21 @@ static void read_hello_txt(char *pwd)
         ESP_LOGE(TAG, "Failed to open %s", pwd);
         return;
     }
-    char buf[64];
-    memset(buf, 0, sizeof(buf));
-    fread(buf, 1, sizeof(buf), file);
+    // print_chip_info();
+    off_t file_size = get_file_size(pwd);
+    char buf[file_size < 2000 ? file_size : 2000];
+    // print_chip_info();
+    off_t current_position = 2000;
+    while (current_position < file_size + 2000)
+    {
+        memset(buf, 0, sizeof(buf));
+        fread(buf, 1, sizeof(buf), file);
+        ESP_LOGI(TAG, "%s", buf);
+        current_position += 1088;
+    }
     fclose(file);
     // Display the read contents from the file
-    ESP_LOGI(TAG, "Read from %s: %s", pwd, buf);
+    ESP_LOGI(TAG, "Read from %s", pwd);
 }
 
 void list_files()
@@ -125,12 +152,8 @@ void spiffs_init()
 
     list_files();
 
-    /* The following calls demonstrate reading files from the generated SPIFFS
-     * image. The images should contain the same files and contents as the spiffs_image directory.
-     */
-
     // Read and display the contents of a small text file (hello.txt)
-    read_hello_txt("/spiffs/index.html");
+    read_file("/spiffs/LICENSE.md");
 
     // All done, unmount partition and disable SPIFFS
     esp_vfs_spiffs_unregister(NULL);

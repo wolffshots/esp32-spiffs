@@ -154,7 +154,9 @@ void spiffs_init()
 
     // Read and display the contents of a small text file (hello.txt)
     read_file("/spiffs/LICENSE.md");
+}
 
+void spiffs_deinit(){
     // All done, unmount partition and disable SPIFFS
     esp_vfs_spiffs_unregister(NULL);
     ESP_LOGI(TAG, "SPIFFS unmounted");

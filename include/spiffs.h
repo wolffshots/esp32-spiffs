@@ -35,6 +35,7 @@
 // function declarations
 void read_file(const char *);
 void spiffs_init(void);
+void spiffs_deinit(void);
 off_t get_file_size(const char *);
 
 #endif // SPIFFS_H

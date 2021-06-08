@@ -153,7 +153,7 @@ void spiffs_init()
     list_files();
 
     // Read and display the contents of a small text file (hello.txt)
-    read_file("/spiffs/LICENSE.md");
+    // read_file("/spiffs/LICENSE.md");
 }
 
 void spiffs_deinit(){

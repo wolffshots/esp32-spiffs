@@ -5,3 +5,4 @@ phy_init,       data,   phy,     0xf000,  0x1000,
 factory,        app,    factory, 0x10000, 1M,
 storage,        data,   spiffs,  ,        0xF0000,
 storage_ext,     data,  spiffs,  ,        4M,
+# todo extend actual partitions especially one front gets embedded in
